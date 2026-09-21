@@ -1,0 +1,50 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  relay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - run: node --test relay/server.test.mjs
+      - run: python3 scripts/test-public-layout.py
+      - run: python3 scripts/test-build-app.py
+
+  apple:
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Toolchain
+        run: xcodebuild -version && swift --version
+      - run: swift test
+      - name: Build development Mac bundle
+        run: PHONESNAP_ALLOW_ADHOC=1 PHONESNAP_APP_PATH=dist/PhoneSnap.app bash scripts/build-app.sh
+      - name: Build unsigned iPhone app
+        run: >-
+          xcodebuild -project ios/PhoneSnap.xcodeproj -scheme PhoneSnap
+          -configuration Release -sdk iphoneos -destination 'generic/platform=iOS'
+          CODE_SIGNING_ALLOWED=NO build

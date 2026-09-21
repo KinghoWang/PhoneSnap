@@ -1,0 +1,23 @@
+services:
+  phonesnap-relay:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - ./private/channels.json:/config/channels.json:ro
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 64
+    mem_limit: 256m
+    memswap_limit: 256m
+    ulimits:
+      core: 0
+    logging:
+      driver: local
+      options:
+        max-size: "1m"
+        max-file: "2"
