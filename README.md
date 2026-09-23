@@ -1,10 +1,12 @@
-# PhoneSnap
+# PhoneSnap — iPhone 截图传 Mac
 
 <img src="docs/assets/logo.png" width="88" alt="PhoneSnap neutral icon">
 
 **iPhone 截图，一键送到 Mac。附近直传优先，跨网络时用自建加密中转兜底。**
 
-Screenshot on iPhone. Use it on your Mac. Local-first, with an optional self-hosted encrypted relay.
+An iPhone-to-Mac screenshot tool with Apple Shortcuts, local-first image transfer, and an optional self-hosted end-to-end encrypted relay.
+
+**使用流程：iPhone 快捷指令截屏 → 自动选路传图 → Mac 复制 / OCR / 标注 / 钉图。**
 
 [English](README.en.md) · [安装与配对](docs/SETUP.md) · [自建中转](relay/README.md) · [架构](docs/ARCHITECTURE.md) · [安全边界](SECURITY.md)
 
@@ -16,7 +18,11 @@ Screenshot on iPhone. Use it on your Mac. Local-first, with an optional self-hos
 
 手机上看到一段内容，想立刻在 Mac 上引用、标注或对照，不想在聊天软件里“发给自己”、下载，再找文件。
 
-PhoneSnap 把这个流程缩成：**触发截图快捷指令 → Mac 收图 → 复制、标注或钉在屏幕上。**
+常见使用场景：
+
+- **手机截图传电脑**：使用 Apple Shortcuts（苹果快捷指令）触发截屏和传图，优先附近／局域网加密直传。
+- **截图文字识别与标注**：在 Mac 上用 OCR 提取文字，或对截图裁剪、标注、遮挡后复制使用。
+- **跨网络私密传图与对照**：需要时配置自建端到端加密中转；收到后可将图片钉在 Mac 屏幕上，方便对照。
 
 它不是云相册、聊天软件或设备远控工具。没有内置账号系统，不提供开发者的公共中转服务。
 
@@ -31,7 +37,7 @@ PhoneSnap 把这个流程缩成：**触发截图快捷指令 → Mac 收图 → 
 | 少传一点 | 公网可选原图 / 快速；快速模式先本机压缩再加密，使用二进制密文传输 |
 | 收图可核对 | 最近截图展示来源、保存大小、传输包大小和可获得的接收计时；未知信息不猜填 |
 | Mac 本地截图 | 区域、窗口、全屏；悬停选窗与手动框选并存 |
-| Mac 后处理 | 标注、裁剪、遮挡、OCR、回车复制、原位 1:1 钉图 |
+| Mac 后处理 | 标注、裁剪、遮挡、文字识别（OCR）、回车复制、原位 1:1 钉图 |
 
 **正常路径：**
 

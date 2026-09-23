@@ -1,10 +1,18 @@
-# PhoneSnap
+# PhoneSnap — iPhone Screenshots to Mac
 
-**Send an iPhone screenshot to your Mac with one Shortcut trigger. Local-first, with an optional self-hosted encrypted relay.**
+**An iPhone-to-Mac screenshot tool powered by Apple Shortcuts. Local-first image transfer, with an optional self-hosted end-to-end encrypted relay.**
+
+**At a glance: Capture on iPhone → Automatic routing → Copy / OCR / Annotate / Pin on Mac.**
 
 [中文说明](README.md) · [Setup](docs/SETUP.md) · [Relay](relay/README.md) · [Security](SECURITY.md)
 
 This is a **source-only developer preview** derived from [Aqu1bp/PhoneSnap](https://github.com/Aqu1bp/PhoneSnap), not an official upstream release. Parts of the Mac editor come from [recursivecodes/grabbit](https://github.com/recursivecodes/grabbit). Original MIT notices are preserved.
+
+## Use cases
+
+- **iPhone screenshot transfer:** trigger capture and delivery with Apple Shortcuts, preferring an encrypted nearby / local network connection.
+- **Screenshot annotation and OCR:** extract text on macOS, or crop, annotate, and redact an image before copying it.
+- **Private image transfer across networks:** configure a self-hosted E2EE relay when needed, then pin the received image on your Mac for reference.
 
 ## The workflow
 
